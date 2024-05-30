@@ -1,0 +1,41 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: students-route
+          uri: lb://student-service
+          predicates:
+            - Path=/students/**
+        - id: parents-route
+          uri: lb://parent-service
+          predicates:
+            - Path=/parents/**
+        - id: clubs-route
+          uri: lb://club-service
+          predicates:
+            - Path=/clubs/**
+        - id: employees-route
+          uri: lb://employees-service
+          predicates:
+            - Path=/employees/**
+        - id: teacher-route
+          uri: lb://teacher-service
+          predicates:
+            - Path=/teachers/**
+        - id: town-route
+          uri: lb://town-service
+          predicates:
+            - Path=/towns/**
+        - id: saga-route
+          uri: lb://saga-service
+          predicates:
+            - Path=/api/**
+  application:
+    name: APIGateway
+server:
+  port: 8080
